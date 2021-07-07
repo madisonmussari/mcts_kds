@@ -1,8 +1,10 @@
-
+def i_ll_play():
+    print("I'll play")
 
 
 class Environment:
-    def __init__(self, heap: list(int), player) -> Environment:
+    # Creates a new Nim environment with the current heap allocation and player.
+    def __init__(self, heap, player):
         self.heap = heap
         self.current_player = player
         pass
@@ -16,7 +18,7 @@ class Environment:
         pass
 
     # Returns the state which results from taking action
-    def takeAction(action: list(int)):
+    def takeAction(action):
         pass
 
     # Returns True if this state is a terminal state

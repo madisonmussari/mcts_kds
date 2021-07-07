@@ -1,4 +1,5 @@
-import nim.environment
+from nim.environment import i_ll_play
+from nim import i_ll_play
 
 if __name__ == "__main__":
-    nim.environment.i_ll_play()
+    i_ll_play()
