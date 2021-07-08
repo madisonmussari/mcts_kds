@@ -1,4 +1,8 @@
-from nim import Environment
+import sys
+
+sys.path.insert(0, '/Users/madison/mcts/nim')
+
+from environment import Environment
 
 # Write test functions for each of the methods of nim environment
 
