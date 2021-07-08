@@ -1,8 +1,10 @@
+import os
 import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-sys.path.insert(0, '/Users/madison/mcts/nim')
+import nim
 
-from environment import Environment
+from nim import Environment
 
 # Write test functions for each of the methods of nim environment
 
