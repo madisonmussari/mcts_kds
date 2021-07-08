@@ -4,32 +4,30 @@ def i_ll_play():
 
 class Environment:
     # Creates a new Nim environment with the current heap allocation and player.
-    def __init__(self, heap, player):
+    def __init__(self,
+                 heap=[10, 10, 10],
+                 current_player=0,
+                 players=["A", "B"]):
         self.heap = heap
-        self.current_player = player
+        self.current_player = current_player
         pass
 
-    #  Returns 1 if it is the maximizer player's turn to choose an action, or -1 for the minimiser player
-    def getCurrentPlayer():
-        pass 
-    
-    # Returns an iterable of all actions which can be taken from this environment
-    def getPossibleActions():
+    #  Returns the identifier for the current player.
+    def turn():
         pass
 
-    # Returns the state which results from taking action
-    def takeAction(action):
+    # Returns an iterable of all actions which can be taken from this environment.
+    def valid_actions():
         pass
 
-    # Returns True if this state is a terminal state
-    def isTerminal():
+    # Returns the state which results from taking action.
+    def what_if(action):
         pass
 
-    # Returns the reward for this environment. Only needed for terminal states.
-    def getReward():
+    # Returns True if this state is a terminal state.
+    def is_terminal():
         pass
 
-    
-
-    
-
+    # Returns the value for this environment.  Values can only be calculated for terminal states.
+    def value():
+        pass
