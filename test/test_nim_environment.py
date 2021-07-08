@@ -1,16 +1,10 @@
-import os
-import sys
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
-import nim
-
-from nim import Environment
+from context import nim
 
 # Write test functions for each of the methods of nim environment
 
 def test_simple_game():
     # Initial states
-    environment = Environment([2, 1, 3], 1, 3)
+    environment = nim.Environment([2, 1, 3], 1, 3)
 
     assert environment.state() == (3, 1, [1, 2, 3])
     assert environment.is_terminal() == False
