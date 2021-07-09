@@ -18,11 +18,32 @@ class Environment:
 
     # Returns an iterable of all actions which can be taken from this environment.
     def valid_actions(self):
-        return ((0, 0) for x in range(2))
+        valid_actions = [(0,1)]
+        action = []
+        for i in range(len(self.heap)-1,0, -1):
+            value = self.heap[i]
+            while value > 0:
+                action = action + [(i,value)]
+                value -= 1
+            valid_actions = valid_actions + action
+        return valid_actions
 
     # Returns the state which results from taking action. Actions are of the form (heap, stones_to_take_out)
     def what_if(self, action):
-        return self
+
+        new_value = self.heap[action[0]] - action[1]
+        if new_value < 0 or self.is_terminal():
+            return Environment(self.heap, self.current_player, self.num_players)
+        
+        new_heap = self.heap.copy()
+        new_heap[action[0]] = new_value
+        
+        if new_heap[action[0]]==0:
+            new_heap.pop(action[0])
+    
+        new_current_player = (self.current_player + 1) % self.num_players
+        environment = Environment(new_heap, new_current_player, self.num_players)
+        return environment
 
     # Returns True if this state is a terminal state.
     def is_terminal(self):
@@ -41,6 +62,4 @@ class Environment:
         return state
 
 
-# main program -  do I need this?
-# while self.game_play == True:
-#   self.turn()
+

@@ -91,7 +91,7 @@ def test_what_if():
 
 
 # Tests valid action  method
-def test_valid_actions(self):
+def test_valid_actions():
     environment = nim.Environment([1, 2, 3], 0, 3)
     expected_valid_actions = {(0, 1), (1, 1), (1, 2), (2, 1), (2, 2), (2, 3)}
     returned_valid_actions = {valid for valid in environment.valid_actions()}
@@ -135,7 +135,7 @@ def test_simple_game():
 
     # Second move, take 1 stone out of heap 0 (first heap)
     environment = environment.what_if((0, 1))
-    assert environment.state() == (3, 1, [3])
+    assert environment.state() == (3, 1, [3]) 
     assert environment.is_terminal() == True
     assert environment.turn() == 0
     assert environment.value(0) == 1
