@@ -17,21 +17,19 @@ class Environment:
 
     # Returns an iterable of all actions which can be taken from this environment.
     def valid_actions(self):
-        valid_actions = []
-        action = []
-        for i in range(len(self.heap)-1,0, -1):
-            value = self.heap[i]
-            while value > 0:
-                action = action + [(i,value)] + [(0,1)]
-                value -= 1
-            valid_actions = valid_actions + action
-        return valid_actions
+        if self.is_terminal():
+            return iter([])
+        
+        return ((i, j) for i in range(len(self.heap)) for j in range(1, self.heap[i]+ 1)) 
 
     # Returns the state which results from taking action. Actions are of the form (heap, stones_to_take_out)
     def what_if(self, action): # what is up with my type annotations?
 
+        if action[0] < 0 or action[0] > len(self.heap) - 1:
+            return Environment(self.heap, self.current_player, self.num_players)
+        
         new_value = self.heap[action[0]] - action[1]
-        if new_value < 0 or self.is_terminal():
+        if new_value < 0 or self.is_terminal() or action[1] <= 0:
             return Environment(self.heap, self.current_player, self.num_players)
         
         new_heap = self.heap.copy()
@@ -57,7 +55,7 @@ class Environment:
 
     # Returns current state (num_players, current_player, heap)
     def state(self):
-        state = (self.num_players, self.current_player, self.heap)
+        state = (self.num_players, self.current_player, tuple(self.heap))
         return state
 
 
