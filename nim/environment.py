@@ -57,6 +57,13 @@ class Environment:
     def state(self):
         state = (self.num_players, self.current_player, tuple(self.heap))
         return state
+    
+    # Making it into a string
+    def __str__(self) -> str:
+        return f"Heap {self.heap}, Current Player {self.current_player}, Number of Players {self.num_players}"
 
 
+
+def str_to_action(action_str):
+    return tuple(map(int, action_str.split(",")))
 
