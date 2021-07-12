@@ -18,12 +18,12 @@ class Environment:
 
     # Returns an iterable of all actions which can be taken from this environment.
     def valid_actions(self):
-        valid_actions = [(0,1)]
+        valid_actions = []
         action = []
         for i in range(len(self.heap)-1,0, -1):
             value = self.heap[i]
             while value > 0:
-                action = action + [(i,value)]
+                action = action + [(i,value)] + [(0,1)]
                 value -= 1
             valid_actions = valid_actions + action
         return valid_actions
