@@ -29,7 +29,7 @@ class Environment:
         return valid_actions
 
     # Returns the state which results from taking action. Actions are of the form (heap, stones_to_take_out)
-    def what_if(self, action: List[int]) -> environment: # what is up with my type annotations?
+    def what_if(self, action: list[int]) -> any: # what is up with my type annotations?
 
         new_value = self.heap[action[0]] - action[1]
         if new_value < 0 or self.is_terminal():
