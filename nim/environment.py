@@ -23,7 +23,7 @@ class Environment:
         return ((i, j) for i in range(len(self.heap)) for j in range(1, self.heap[i]+ 1)) 
 
     # Returns the state which results from taking action. Actions are of the form (heap, stones_to_take_out)
-    def what_if(self, action): # what is up with my type annotations?
+    def what_if(self, action): 
 
         if action[0] < 0 or action[0] > len(self.heap) - 1:
             return Environment(self.heap, self.current_player, self.num_players)
