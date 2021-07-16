@@ -52,6 +52,10 @@ class Environment:
         if self.is_terminal() and (current_player < self.num_players):
             score = 1 if self.current_player == current_player else -1
         return score
+    
+    # Returns number of agents
+    def num_agents(self):
+        return self.num_players
 
     # Returns current state (num_players, current_player, heap)
     def state(self):

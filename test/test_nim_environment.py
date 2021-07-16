@@ -101,6 +101,13 @@ def test_valid_actions():
     assert expected_valid_actions == returned_valid_actions
 
 
+# Test number of players
+def test_num_agents():
+    for num_players in range(1, 10):
+        environment = nim.Environment([2, 2, 3], 0, num_players)
+        assert environment.num_agents() == num_players
+
+
 # Plays a full game of Nim
 def test_simple_game():
     # Initial states
