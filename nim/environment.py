@@ -7,7 +7,7 @@ class Environment:
     # creates a new nim environment
     def __init__(self, heap=[10, 10, 10], current_player=0, num_players=2):
 
-        self.heap = sorted(heap)
+        self.heap = [h for h in sorted(heap) if h > 0]
         self.current_player = current_player if current_player < num_players else 0
         self.num_players = num_players
 
@@ -55,13 +55,17 @@ class Environment:
 
     # Returns current state (num_players, current_player, heap)
     def state(self):
-        state = (self.num_players, self.current_player, tuple(self.heap))
+        state = (tuple(self.heap), self.current_player, self.num_players)
         return state
     
     # Making it into a string
     def __str__(self) -> str:
         return f"Heap {self.heap}, Current Player {self.current_player}, Number of Players {self.num_players}"
 
+
+# Returns an environment from a state
+def from_state(state):
+    return Environment(list(state[0]), state[1], state[2])
 
 
 def str_to_action(action_str):
