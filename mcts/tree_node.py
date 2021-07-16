@@ -1,4 +1,5 @@
 from .utils import random_rollout
+from math import sqrt
 
 class TreeNode:
     def __init__(self, environment, parent=None):
@@ -13,10 +14,9 @@ class TreeNode:
         self.parent = parent
         pass
 
-    def selection(self, exploration_parameter):
+    def selection(self, exploration_parameter=sqrt(2)):
         '''
-        Given a current_environment, this method returns an action based on the
-        current state of the montecarlo tree. 
+        This method returns a list with the best child nodes based on the uct selection function
         '''
         pass
 
