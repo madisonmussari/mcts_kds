@@ -1,6 +1,3 @@
-def i_ll_play():
-    print("I'll play")
-
 ## TODO: Document the functions. 
 
 class Environment:
@@ -20,7 +17,13 @@ class Environment:
         if self.is_terminal():
             return iter([])
         
-        return ((i, j) for i in range(len(self.heap)) for j in range(1, self.heap[i]+ 1)) 
+        return ((i, j) for i in range(len(self.heap)) for j in range(1, self.heap[i]+ 1))
+
+    def random_action(self):
+        '''
+        Produces a random action
+        '''
+        pass
 
     # Returns the state which results from taking action. Actions are of the form (heap, stones_to_take_out)
     def what_if(self, action): 
