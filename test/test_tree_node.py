@@ -9,7 +9,7 @@ def make_expanded_node(heap=[3, 2, 4], current_player=0, num_players=2):
     parent_node = tree_node.TreeNode(environment)
 
     parent_node.children = [
-        tree_node.TreeNode(environment.what_if(action))
+        tree_node.TreeNode(environment.what_if(action), parent_node, action)
         for action in environment.valid_actions()
     ]
 
@@ -94,42 +94,36 @@ def test_selection_5():
 
 def test_expansion():
     # First example
-    environment = nim.Environment([2, 3, 1], 0,
-                                  2)  # should it instead be mcts.TreeNode?
-    tree_node = mcts.TreeNode(environment)
+    environment = nim.Environment([2, 3, 1], 0, 2)
+    root_node = mcts.TreeNode(environment)
 
     expected_children_before_expansion = {}
-    real_children_before_expansion = set(tree_node.children)
+    real_children_before_expansion = set(root_node.children)
 
     assert expected_children_before_expansion == real_children_before_expansion
 
-    tree_node.expansion()
-    expected_children_constructor = [([1, 3, 1], 1, 2), ([3, 1], 1, 2),
-                                     ([2, 2, 1], 1, 2), ([2, 1, 1], 1, 2),
-                                     ([2, 1], 1, 2), ([2, 3, 0], 1, 2)]
+    root_node.expansion()
     expected_children_after_expansion = {
-        mcts.TreeNode(nim.Environment(a[0], a[1], a[2]))
-        for a in expected_children_constructor
+        mcts.TreeNode(environment.what_if(action), root_node, action)
+        for action in environment.valid_actions()
     }
-    assert set(tree_node.children) == expected_children_after_expansion
+    assert set(root_node.children) == expected_children_after_expansion
 
     # Second example
     environment = nim.Environment([2, 2, 2], 2, 3)
-    tree_node = mcts.TreeNode(environment)
+    root_node = mcts.TreeNode(environment)
 
     expected_children_before_expansion = {}
-    real_children_before_expansion = set(tree_node.children)
+    real_children_before_expansion = set(root_node.children)
 
     assert expected_children_before_expansion == real_children_before_expansion
 
-    tree_node.expansion()
-    expected_children_constructor = {([1, 2, 2], 0, 3), ([2, 2], 0, 3),
-                                     ([2, 1, 2], 0, 3), ([2, 2, 1], 0, 3)}
+    root_node.expansion()
     expected_children_after_expansion = {
-        mcts.TreeNode(nim.Environment(a[0], a[1], a[2]))
-        for a in expected_children_constructor
+        mcts.TreeNode(environment.what_if(action), root_node, action)
+        for action in environment.valid_actions()
     }
-    assert set(tree_node.children) == expected_children_after_expansion
+    assert set(root_node.children) == expected_children_after_expansion
 
 
 def test_backpropogation():
@@ -191,17 +185,58 @@ def test_simulation():
     # An environment that always leads to a win
     heap = [1] * 5
     environment = nim.Environment(heap, 0, 2)
-    tree_node = mcts.TreeNode(environment)
+    root_node = mcts.TreeNode(environment)
 
     expected_value = [1, -1]
-    real_value = tree_node.simulation()
+    real_value = root_node.simulation()
     assert expected_value == real_value
 
     # An environment that always leads to a loss
     heap = [1] * 6
     environment = nim.Environment(heap, 0, 2)
-    tree_node = mcts.TreeNode(environment)
+    root_node = mcts.TreeNode(environment)
 
     expected_value = [-1, 1]
-    real_value = tree_node.simulation()
+    real_value = root_node.simulation()
     assert expected_value == real_value
+
+
+def test_eq():
+    heap = [4,3,1,2]
+    environment_1 = nim.Environment(heap, 0, 2)
+    node_1 = mcts.TreeNode(environment_1)
+
+    environment_2 = nim.Environment(heap, 0, 2)
+    node_2 = mcts.TreeNode(environment_2)
+
+    assert node_1 == node_2
+
+    node_3 = mcts.TreeNode(environment_1, node_2, (3, 3))
+    node_4 = mcts.TreeNode(environment_2, node_1, (3, 3))
+
+    assert node_3 == node_4
+    assert node_1 != node_3
+
+
+def test_hash():
+    heap = [4,3,1,2]
+    environment_1 = nim.Environment(heap, 0, 2)
+    node_1 = mcts.TreeNode(environment_1)
+
+    environment_2 = nim.Environment(heap, 0, 2)
+    node_2 = mcts.TreeNode(environment_2)
+
+    assert hash(node_1) == hash(node_2)
+
+    node_3 = mcts.TreeNode(environment_1, node_2, (3, 3))
+    node_4 = mcts.TreeNode(environment_2, node_1, (3, 3))
+
+    assert hash(node_3) == hash(node_4)
+    assert hash(node_1) != hash(node_3)
+
+    new_heap = [1, 2, 3]
+    environment_5 = nim.Environment(new_heap, 1, 3)
+    node_5 = mcts.TreeNode(environment_5)
+
+    assert hash(node_5) != hash(node_1)
+    assert hash(node_5) != hash(node_3)

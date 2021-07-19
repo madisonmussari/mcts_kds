@@ -2,7 +2,7 @@ from .utils import random_rollout
 from math import sqrt
 
 class TreeNode:
-    def __init__(self, environment, parent=None):
+    def __init__(self, environment, parent=None, action=None):
         '''
         Initializes a node for montecarlo tree search.
         '''
@@ -12,11 +12,22 @@ class TreeNode:
         self.children = []
         self.is_expanded = False
         self.parent = parent
+        self.action = action
+        pass
+    
+    def __eq__(self, o: object) -> bool:
+        pass
+
+    def __repr__(self) -> str:
+        pass
+
+    def __hash__(self) -> int:
+        return hash(repr(self))
         pass
 
     def selection(self, exploration_parameter=sqrt(2)):
         '''
-        This method returns a list with the best child nodes based on the uct selection function
+        This method returns a list with the subset of children with higher ucb score.
         '''
         pass
 

@@ -1,4 +1,10 @@
+from .tree_node import TreeNode
+from math import sqrt
 
-class Mcts:
-    def __init__(self, tree_node, rounds) -> None:
-        pass
+
+def mcts(root_node, rounds, exploration_parameter=sqrt(2)):
+    '''
+    Returns an action after running montecarlo tree search with a given root_node 
+    for a number of rounds and using an exploration_parameter. 
+    '''
+    pass

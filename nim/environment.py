@@ -63,7 +63,7 @@ class Environment:
         return state
     
     # Making it into a string
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         return f"Heap {self.heap}, Current Player {self.current_player}, Number of Players {self.num_players}"
 
 
