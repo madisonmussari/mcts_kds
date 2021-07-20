@@ -181,11 +181,11 @@ def test_random_action():
     
     total_number_of_actions = len([a for a in environment.valid_actions()])
     expected_number_of_actions = number_repetitions / total_number_of_actions
-    prob = expected_number_of_actions / total_number_of_actions
+    prob = 1 / total_number_of_actions
     threshold = ceil(3 * sqrt(number_repetitions * prob * (1 - prob)))
 
-    for number_of_repetitions in actions_seen.values():
-        assert abs(number_repetitions - expected_number_of_actions) <= threshold
+    for repetions in actions_seen.values():
+        assert abs(repetions - expected_number_of_actions) <= threshold
 
 
 
