@@ -69,6 +69,10 @@ class Environment:
     def __repr__(self) -> str:
         return f"Heap {self.heap}, Current Player {self.current_player}, Number of Players {self.num_players}"
 
+    def __eq__(self, o: object) -> bool:
+        if isinstance(o, Environment):
+            return self.heap == o.heap and self.current_player == o.current_player and self.num_players == o.num_players 
+        return False
 
 # Returns an environment from a state
 def from_state(state):

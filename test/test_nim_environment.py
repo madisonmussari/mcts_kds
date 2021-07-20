@@ -164,3 +164,12 @@ def test_from_state():
     environment_state = environment.state()
 
     assert original_state == environment_state
+
+def test_eq():
+    heap = [1,2,3]
+    environment_1 = nim.Environment(heap,2,3)
+    environment_2 = nim.Environment(heap,2,3)
+    environment_3 = nim.Environment(heap,0,2)
+
+    assert environment_1 == environment_2
+    assert environment_1 != environment_3

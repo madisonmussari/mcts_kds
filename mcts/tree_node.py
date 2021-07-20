@@ -16,14 +16,15 @@ class TreeNode:
         pass
     
     def __eq__(self, o: object) -> bool:
-        pass
+        if isinstance(o, TreeNode):
+            return self.environment == o.environment and self.is_expanded == o.is_expanded and self.parent == o.parent and self.action == o.action
+        return False
 
     def __repr__(self) -> str:
-        pass
-
+        return f"Environment {self.environment}, Parent {self.parent}, Action {self.action} "
+        
     def __hash__(self) -> int:
         return hash(repr(self))
-        pass
 
     def selection(self, exploration_parameter=sqrt(2)):
         '''
