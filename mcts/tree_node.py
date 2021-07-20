@@ -17,7 +17,12 @@ class TreeNode:
     
     def __eq__(self, o: object) -> bool:
         if isinstance(o, TreeNode):
-            return self.environment == o.environment and self.is_expanded == o.is_expanded and self.parent == o.parent and self.action == o.action
+            return self.environment == o.environment and \
+                 self.is_expanded == o.is_expanded and \
+                     self.parent == o.parent and \
+                         self.action == o.action and \
+                             self.num_visits == o.num_visits and \
+                                 self.agent_to_value == o.agent_to_value
         return False
 
     def __repr__(self) -> str:

@@ -217,6 +217,19 @@ def test_eq():
     assert node_3 == node_4
     assert node_1 != node_3
 
+    node_3.num_visits = 10
+    assert node_3 != node_4
+
+    node_4.num_visits = 10
+    assert node_3 == node_4
+
+    node_3.agent_to_value = [-5, 5]
+    assert node_3 != node_4
+
+    node_4.agent_to_value = [-5, 5]
+    assert node_3 == node_4
+
+
 
 def test_hash():
     heap = [4,3,1,2]
