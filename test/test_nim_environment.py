@@ -165,6 +165,30 @@ def test_from_state():
 
     assert original_state == environment_state
 
+# Test random action
+def test_random_action():
+    from math import sqrt
+    from math import ceil
+
+    environment = nim.Environment([3, 4, 5], 0, 2)
+
+    actions_seen = dict()
+    number_repetitions = 1000
+
+    for _ in range(number_repetitions):
+        current_action = environment.random_action()
+        actions_seen[current_action] = actions_seen.get(current_action, 0) + 1
+    
+    total_number_of_actions = len([a for a in environment.valid_actions()])
+    expected_number_of_actions = number_repetitions / total_number_of_actions
+    prob = expected_number_of_actions / total_number_of_actions
+    threshold = ceil(3 * sqrt(number_repetitions * prob * (1 - prob)))
+
+    for number_of_repetitions in actions_seen.values():
+        assert abs(number_repetitions - expected_number_of_actions) <= threshold
+
+
+
 def test_eq():
     heap = [1,2,3]
     environment_1 = nim.Environment(heap,2,3)
