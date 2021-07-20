@@ -1,4 +1,5 @@
 ## TODO: Document the functions. 
+import random
 
 class Environment:
     # creates a new nim environment
@@ -23,7 +24,13 @@ class Environment:
         '''
         Produces a random action
         '''
-        pass
+        heap_len = len(self.heap)
+        pile = random.randrange(0,(heap_len - 1))
+        pile_stones = self.heap[pile]
+        num_stones = random.randrange(0,pile_stones)
+
+        return (pile,num_stones)
+
 
     # Returns the state which results from taking action. Actions are of the form (heap, stones_to_take_out)
     def what_if(self, action): 
