@@ -215,7 +215,7 @@ def test_eq():
     node_4 = mcts.TreeNode(environment_2, node_1, (3, 3))
 
     assert node_3 == node_4
-    assert node_1 != node_3
+    assert node_1.parent != node_3.parent
 
 
 def test_hash():
