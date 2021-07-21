@@ -1,5 +1,6 @@
 from .utils import random_rollout
 from math import sqrt
+from nim import environment
 
 class TreeNode:
     def __init__(self, environment, parent=None, action=None):
@@ -9,7 +10,7 @@ class TreeNode:
         self.environment = environment
         self.num_visits = 0
         self.agent_to_value = []    # Keeps a list with the current value for each agent.
-        self.children = []
+        self.children = []          
         self.is_expanded = False
         self.parent = parent
         self.action = action
@@ -48,10 +49,15 @@ class TreeNode:
 
     def expansion(self):
         '''
-        Populates children
+        Populates children. To initalize a child we must give it the current environment, parent, and action.
         '''
-        
-        pass
+        num_children  = len(self.environment.valid_actions())
+        parent = environment
+        for i in range(num_children):
+            action = self.environment.valid_actions[i]
+            result = self.environment.what_if(action)
+            self.children.append(result, parent, action)
+        return self.children
 
     def backpropagation(self, value):
         '''
