@@ -1,6 +1,5 @@
 from .utils import random_rollout
 from math import sqrt
-from nim import environment
 
 class TreeNode:
     def __init__(self, environment, parent=None, action=None):
