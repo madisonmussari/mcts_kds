@@ -1,15 +1,13 @@
 from context import nim
 from context import mcts
-from mcts import tree_node
-from nim import environment
 
 
 def make_expanded_node(heap=[3, 2, 4], current_player=0, num_players=2):
     environment = nim.Environment(heap, current_player, num_players)
-    parent_node = tree_node.TreeNode(environment)
+    parent_node = mcts.TreeNode(environment)
 
     parent_node.children = [
-        tree_node.TreeNode(environment.what_if(action), parent_node, action)
+        mcts.TreeNode(environment.what_if(action), parent_node, action)
         for action in environment.valid_actions()
     ]
 
