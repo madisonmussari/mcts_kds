@@ -51,13 +51,13 @@ class TreeNode:
         '''
         Populates children. To initalize a child we must give it the current environment, parent, and action.
         '''
-        num_children  = len(self.environment.valid_actions())
-        parent = environment
-        for i in range(num_children):
-            action = self.environment.valid_actions[i]
-            result = self.environment.what_if(action)
-            self.children.append(result, parent, action)
-        return self.children
+        self.children = [TreeNode(self.environment.what_if(action), self, action) for action in self.environment.valid_actions()]
+        
+        for child in self.children:
+            child.simulation()
+        
+        self.is_expanded = True
+    
 
     def backpropagation(self, value):
         '''

@@ -1,7 +1,7 @@
-from mcts import tree_node
-from nim import environment
 from context import nim
 from context import mcts
+from mcts import tree_node
+from nim import environment
 
 
 def make_expanded_node(heap=[3, 2, 4], current_player=0, num_players=2):
@@ -92,15 +92,16 @@ def test_selection_5():
     assert expected_selection == selected
 
 
-def test_expansion():
+def test_expansion_1():
     # First example
     environment = nim.Environment([2, 3, 1], 0, 2)
     root_node = mcts.TreeNode(environment)
 
-    expected_children_before_expansion = {}
+    expected_children_before_expansion = set()
     real_children_before_expansion = set(root_node.children)
 
     assert expected_children_before_expansion == real_children_before_expansion
+    assert root_node.is_expanded == False
 
     root_node.expansion()
     expected_children_after_expansion = {
@@ -108,15 +109,17 @@ def test_expansion():
         for action in environment.valid_actions()
     }
     assert set(root_node.children) == expected_children_after_expansion
+    assert root_node.is_expanded == True
 
-    # Second example
+def test_expansion_2():
     environment = nim.Environment([2, 2, 2], 2, 3)
     root_node = mcts.TreeNode(environment)
 
-    expected_children_before_expansion = {}
+    expected_children_before_expansion = set()
     real_children_before_expansion = set(root_node.children)
 
     assert expected_children_before_expansion == real_children_before_expansion
+    assert root_node.is_expanded == False
 
     root_node.expansion()
     expected_children_after_expansion = {
@@ -124,6 +127,7 @@ def test_expansion():
         for action in environment.valid_actions()
     }
     assert set(root_node.children) == expected_children_after_expansion
+    assert root_node.is_expanded == True
 
 
 def test_backpropogation():
@@ -178,10 +182,8 @@ def test_backpropogation():
     assert node_2.agent_to_value == [-1, 2, 1]
     assert node_3.agent_to_value == [-1, 2, 1]
 
-    pass
 
-
-def test_simulation():
+def test_simulation_1():
     # An environment that always leads to a win
     heap = [1] * 5
     environment = nim.Environment(heap, 0, 2)
@@ -191,6 +193,7 @@ def test_simulation():
     real_value = root_node.simulation()
     assert expected_value == real_value
 
+def test_simulation_2():
     # An environment that always leads to a loss
     heap = [1] * 6
     environment = nim.Environment(heap, 0, 2)
