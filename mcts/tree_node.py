@@ -1,5 +1,6 @@
 from .utils import random_rollout
 from math import sqrt
+from nim import environment
 
 class TreeNode:
     def __init__(self, environment, parent=None, action=None):
@@ -8,8 +9,8 @@ class TreeNode:
         '''
         self.environment = environment
         self.num_visits = 0
-        self.agent_to_value = []    # Keeps a list with the current value for each agent.
-        self.children = []          
+        self.agent_to_value = [0] * self.environment.num_agents()     # Keeps a list with the current value for each agent.
+        self.children = []        
         self.is_expanded = False
         self.parent = parent
         self.action = action
@@ -44,6 +45,7 @@ class TreeNode:
         takes an environment and returns an action. A simple rollout_strategy will return a 
         random action from all possible actions.
         '''
+        
         pass
 
     def expansion(self):
@@ -62,4 +64,15 @@ class TreeNode:
         '''
         Propagates the value from a node to all of its ancesters. 
         '''
-        pass
+        for i in range(len(self.agent_to_value)):   
+            self.agent_to_value[i] += value[i]
+        
+        self.num_visits +=1
+
+        if self.parent != None:
+            self.parent.backpropagation(value)
+
+        
+
+
+

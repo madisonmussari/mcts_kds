@@ -129,20 +129,21 @@ def test_expansion_2():
 
 
 def test_backpropogation():
-    node_0 = mcts.TreeNode([])
-    node_1 = mcts.TreeNode([], parent=node_0)
-    node_2 = mcts.TreeNode([], parent=node_1)
-    node_3 = mcts.TreeNode([], parent=node_2)
+    environment = nim.Environment([2, 2, 2], 2, 3)
+    node_0 = mcts.TreeNode(environment)
+    node_1 = mcts.TreeNode(environment, parent=node_0)
+    node_2 = mcts.TreeNode(environment, parent=node_1)
+    node_3 = mcts.TreeNode(environment, parent=node_2)
 
     assert node_0.num_visits == 0
     assert node_1.num_visits == 0
     assert node_2.num_visits == 0
     assert node_3.num_visits == 0
 
-    assert node_0.agent_to_value == []
-    assert node_1.agent_to_value == []
-    assert node_2.agent_to_value == []
-    assert node_3.agent_to_value == []
+    assert node_0.agent_to_value == [0,0,0]
+    assert node_1.agent_to_value == [0,0,0]
+    assert node_2.agent_to_value == [0,0,0]
+    assert node_3.agent_to_value == [0,0,0]
 
     node_3.backpropagation([1, 0, -1])
 
