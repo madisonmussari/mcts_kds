@@ -45,8 +45,10 @@ class TreeNode:
         takes an environment and returns an action. A simple rollout_strategy will return a 
         random action from all possible actions.
         '''
-        
-        pass
+        current_environment = self.environment
+        while not (current_environment.is_terminal()):
+            current_environment = rollout_strategy(current_environment)
+        return [current_environment.value(k) for k in range(current_environment.num_agents)]
 
     def expansion(self):
         '''
