@@ -255,3 +255,6 @@ def test_hash():
 
     assert hash(node_5) != hash(node_1)
     assert hash(node_5) != hash(node_3)
+
+if __name__ == "__main__":
+    test_simulation_1()

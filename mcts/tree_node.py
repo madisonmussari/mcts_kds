@@ -48,7 +48,7 @@ class TreeNode:
         current_environment = self.environment
         while not (current_environment.is_terminal()):
             current_environment = rollout_strategy(current_environment)
-        return [current_environment.value(k) for k in range(current_environment.num_agents)]
+        return [current_environment.value(k) for k in range(current_environment.num_agents())]
 
     def expansion(self):
         '''

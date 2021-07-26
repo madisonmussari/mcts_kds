@@ -24,9 +24,12 @@ class Environment:
         '''
         Produces a random action
         '''
+        if self.is_terminal():
+            return None
+
         pile = random.choices(range(len(self.heap)), weights=self.heap)[0]
         pile_stones = self.heap[pile]
-        num_stones = random.randrange(0,pile_stones)
+        num_stones = random.randrange(0,pile_stones) + 1
 
         # return random.choice([a for a in self.valid_actions()])
 
