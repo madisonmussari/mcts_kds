@@ -45,9 +45,11 @@ class TreeNode:
             score = child_value/child_visits + exploration_parameter*sqrt(log(self.num_visits)/child_visits)
             if score == best_score:
                 best_children.append(child)
+                best_score = score
             elif score > best_score:
                 best_children.clear()
                 best_children.append(child)
+                best_score = score
 
         return best_children
 
