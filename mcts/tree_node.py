@@ -1,5 +1,5 @@
 from .utils import random_rollout
-from math import sqrt
+from math import inf, log, sqrt
 from nim import environment
 
 class TreeNode:
@@ -36,7 +36,20 @@ class TreeNode:
         '''
         This method returns a list with the subset of children with higher ucb score.
         '''
-        pass
+        best_children = [] 
+        best_score = -inf
+        current_player = self.environment.turn()
+        for child in self.children: 
+            child_value = child.agent_to_value[current_player]
+            child_visits = child.num_visits
+            score = child_value/child_visits + exploration_parameter*sqrt(log(self.num_visits)/child_visits)
+            if score == best_score:
+                best_children.append(child)
+            elif score > best_score:
+                best_children.clear()
+                best_children.append(child)
+
+        return best_children
 
     def simulation(self, rollout_strategy=random_rollout):
         '''
