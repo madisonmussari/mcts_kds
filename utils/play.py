@@ -1,6 +1,10 @@
-# This functions looks at the current environment, asks the corresponding player to make a move, 
-# and updates the  current environment accordingly
+
 def play(environment, players):
+    '''
+    This function looks at the current environment, asks the corresponding player to make a move, 
+    and updates the  current environment accordingly. The function returns a log with
+    (environment, current_player, action) for each move.
+    '''
     log_moves = []
     while not environment.is_terminal():
         current_player = environment.turn()
