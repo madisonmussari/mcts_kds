@@ -13,9 +13,9 @@ class PerfectPlayer:
         Returns an action that leads to a new environment with a nim-sum of zero (if that's possible).
         This strategy would produce a perfect play for environments with two players.
         """
-        if self.nim_sum == 0:
-            move = environment.random_action()
-        else:
+        # if self.nim_sum == 0:
+        #     move = environment.random_action()
+        # else:
             
 
 
