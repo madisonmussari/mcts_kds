@@ -1,13 +1,27 @@
+from random import randrange
 class PerfectPlayer:
     def __init__(self) -> None:
+        self.nim_sum = 0
         pass
+
+    def nim_sum(self, environment):
+        for i in environment.heap:
+            self.nim_sum = self.nim_sum ^ i
 
     def action(self, environment):
         """
         Returns an action that leads to a new environment with a nim-sum of zero (if that's possible).
         This strategy would produce a perfect play for environments with two players.
         """
-        pass
+        if self.nim_sum == 0:
+            move = environment.random_action()
+        else:
+            
+
+
+
+
+
 
 class AlmostPerfectPlayer:
     def __init__(self, weakness_positions) -> None:
@@ -28,4 +42,4 @@ class RandomPlayer:
         """
         Produces random moves.
         """
-        pass
+        return environment.valid_actions[randrange(len(environment.valid_actions))]  # or just use random_action()

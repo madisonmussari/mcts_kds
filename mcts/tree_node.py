@@ -56,7 +56,7 @@ class TreeNode:
     def simulation(self, rollout_strategy=random_rollout):
         '''
         Runs a current environment until a terminal state and returns its value. 
-        It selects new environments based on a selection_function. The rollout_strategy 
+        It selects new environments based on a sele and ction_function. The rollout_strategy 
         takes an environment and returns an action. A simple rollout_strategy will return a 
         random action from all possible actions.
         '''
