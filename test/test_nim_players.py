@@ -1,4 +1,3 @@
-from nim import environment
 from context import nim
 from context import utils
 
