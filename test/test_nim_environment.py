@@ -197,3 +197,12 @@ def test_eq():
 
     assert environment_1 == environment_2
     assert environment_1 != environment_3
+
+def test_hash():
+    heap = [1,2,3]
+    environment_1 = nim.Environment(heap,2,3)
+    environment_2 = nim.Environment(heap,2,3)
+    environment_3 = nim.Environment(heap,0,2)
+
+    assert hash(environment_1) == hash(environment_2)
+    assert hash(environment_1) != hash(environment_3)

@@ -84,6 +84,9 @@ class Environment:
         if isinstance(o, Environment):
             return self.heap == o.heap and self.current_player == o.current_player and self.num_players == o.num_players 
         return False
+    
+    def __hash__(self) -> int:
+        return hash(repr(self))
 
 # Returns an environment from a state
 def from_state(state):
