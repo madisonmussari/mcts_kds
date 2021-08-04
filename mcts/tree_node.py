@@ -92,7 +92,6 @@ class TreeNode:
             child_node.parents.add(self.environment)
             child_node.simulation()
             self.children[action] = child_node
-            self.cache[child_environment] = child_node
 
         self.is_expanded = True
 

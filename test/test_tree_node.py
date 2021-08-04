@@ -119,7 +119,7 @@ def test_expansion_1():
     expected_expanded_node = make_expanded_node([2, 3, 1], 0, 2)
 
     for action, child_node in root_node.children.items():
-        assert child_node.environment == expected_expanded_node.children[action]
+        assert child_node.environment == expected_expanded_node.children[action].environment
 
     assert root_node.is_expanded == True
 
@@ -139,7 +139,7 @@ def test_expansion_2():
     expected_expanded_node = make_expanded_node([2, 2, 2], 2, 3)
 
     for action, child_node in root_node.children.items():
-        assert child_node.environment == expected_expanded_node.children[action]
+        assert child_node.environment == expected_expanded_node.children[action].environment
 
     assert root_node.is_expanded == True
 
@@ -148,7 +148,8 @@ def test_backpropogation():
     environment = nim.Environment([2, 2, 2], 2, 3)
     node = mcts.TreeNode(environment)
     node.expansion()
-    node.agent_to_value = [0,0,0]
+    node.agent_to_value = [0, 0, 0]
+    node.num_visits = 0
 
     num_visits = 0
     for _, child_node in node.children.items():
