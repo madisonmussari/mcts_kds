@@ -69,11 +69,15 @@ class TreeNode:
         current_environment = current_node.environment
         while not (current_environment.is_terminal()):
             current_environment = rollout_strategy(current_environment)
-        return [
+        
+        simulation_value = [
             current_environment.value(k)
             for k in range(current_environment.num_agents())
         ]
 
+        current_node.backpropagation(simulation_value)
+        return simulation_value
+   
     def expansion(self):
         '''
         Populates the children of a node.
@@ -87,6 +91,7 @@ class TreeNode:
                 child_environment, TreeNode(child_environment, self.cache))
             child_node.parents.add(self.environment)
             child_node.simulation()
+            self.children[action] = child_node
             self.cache[child_environment] = child_node
 
         self.is_expanded = True

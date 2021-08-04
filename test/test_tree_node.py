@@ -148,6 +148,7 @@ def test_backpropogation():
     environment = nim.Environment([2, 2, 2], 2, 3)
     node = mcts.TreeNode(environment)
     node.expansion()
+    node.agent_to_value = [0,0,0]
 
     num_visits = 0
     for _, child_node in node.children.items():
