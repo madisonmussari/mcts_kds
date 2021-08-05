@@ -12,9 +12,9 @@ class PerfectPlayer:
         Returns an action that leads to a new environment with a nim-sum of zero (if that's possible).
         This strategy would produce a perfect play for environments with two players.
 
-        Parameters:
+        Args:
             environment: nim.Environment
-                PerfectPlayer choses action for this environment
+                PerfectPlayer choses an action for this environment
 
         Returns:
             (pile,num_stones): (int,int)
@@ -32,7 +32,14 @@ class PerfectPlayer:
                        
 
 class AlmostPerfectPlayer:
+    """
+    An AlmostPerfectPlayer choses an optimal action for the game nim, except when in a weakness_position.
+    """
     def __init__(self, weakness_positions) -> None:
+        """
+        Args:
+            weakness_positions: environment #CHECK
+        """
         self.weakness_positions = weakness_positions
         self.perfect = PerfectPlayer()
 
@@ -40,6 +47,14 @@ class AlmostPerfectPlayer:
         """
         Acts as a perfect player unless it sees one of the weakness_positions, in which case, it returns a
         subobtimal action.
+
+        Args:
+            environment: nim.Environment
+                AlmostPerfectPlayer choses an action for this environment
+
+        Returns:
+            (pile,num_stones): (int,int)
+                the location and number of stones removed from a heap
         """
         if environment.heap in self.weakness_positions:
             return environment.random_action()
@@ -48,11 +63,21 @@ class AlmostPerfectPlayer:
 
 
 class RandomPlayer:
+    """
+    A RandomPlayer choses random valid actions for the game nim.
+    """
     def __init__(self) -> None:
         pass
 
     def action(self, environment):
-        """
-        Produces random moves.
+        """[summary]
+
+        Args:
+            environment: nim.Environment
+                RandomPlayer choses an action for this environment
+
+        Returns:
+            (pile,num_stones): (int,int)
+                the location and number of stones removed from a heap
         """
         return environment.random_action()
