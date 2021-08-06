@@ -80,7 +80,7 @@ class TreeNode:
                 takes an environment and returns an action. Defaults to random_rollout.
 
         Returns:
-            simulation_value: list #CHECK
+            simulation_value: list 
         """
 
         current_node = self
