@@ -1,16 +1,18 @@
-## TODO: Document the functions. 
 import random
 
 class Environment:
     """
-    Creates a new nim environment
+    Creates a new nim environment.
     """
     def __init__(self, heap=[10, 10, 10], current_player=0, num_players=2):
         """
         Args:
-            heap (list, int): Describes the number of heaps and stones in each heap. Defaults to [10, 10, 10].
-            current_player (int): Keeps track of which player's turn it is. Defaults to 0.
-            num_players (int)): Takes note of the number of players in the game. Defaults to 2.
+            heap : [int]
+                Describes the number of heaps and stones in each heap. Defaults to [10, 10, 10].
+            current_player: int
+                Keeps track of which player's turn it is. Defaults to 0.
+            num_players: int
+                Takes note of the number of players in the game. Defaults to 2.
         """
 
         self.heap = [h for h in sorted(heap) if h > 0]
@@ -20,8 +22,10 @@ class Environment:
     
     def turn(self):
         """
+        Determines which player's turn it is.
+
         Returns:
-            current_player: int
+            current_player: int 
                 the identifier for the current player
         """
         return self.current_player
@@ -29,11 +33,11 @@ class Environment:
 
     def valid_actions(self):
         """
-        Finds the possible actions that could be taken by the player in the current environment
+        Finds the possible actions that could be taken by the player in the current environment.
 
         Returns:
-            tuple: (lists)
-                an iterable of all actions which can be taken from this environment 
+            valid_action_iterable: [(heap, stones)]
+                a valid heap and number of stones that a player could take from that heap. 
         """
         if self.is_terminal():
             return iter([])
@@ -42,7 +46,7 @@ class Environment:
 
     def random_action(self):
         """
-        Determines a random action that is valid in the current environment
+        Produces a valid random action.
 
         Returns:
            (pile,num_stones): (int,int)
@@ -60,10 +64,9 @@ class Environment:
         return (pile,num_stones)
 
 
-
     def what_if(self, action): 
         """
-        Determines the expected game state/environment after an move is made by a player
+        Produces game state/environment assuming that player moves "action". 
 
         Args:
             action (int,int): Describes the location and number of stones removed from a heap by the player
@@ -93,7 +96,7 @@ class Environment:
 
     def is_terminal(self):
         """
-        Checks if
+        Checks if the current heap represents a terminal position.
 
         Returns:
             Boolean: True or False
@@ -104,14 +107,14 @@ class Environment:
     
     def value(self, current_player):
         """
-        Calculated for terminal states and determines the value of the leaf node
+        Determines the value of a terminal environment (last node in a branch). If the environment is not terminal, it returns None
 
         Args:
             current_player (int): the identifier for the current player
 
         Returns:
             score: int
-                the value for this environment (1 for a win and -1 for a loss) 
+                the value for this environment (1 for a win and -1 for a loss). When the environment is not terminal, it returns None.
         """
         score = None
         if self.is_terminal() and (current_player < self.num_players):
@@ -129,17 +132,24 @@ class Environment:
     
     def state(self):
         """
-        Describes the current envrionment of the game
+        Describes the current envrionment of the game.
 
         Returns:
             state: list
-               (num_players, current_player, heap)  
+               (heap, current_player, num_players)  
         """
         state = (tuple(self.heap), self.current_player, self.num_players)
         return state
     
-    # Making it into a string
+
     def __repr__(self) -> str:
+        """
+        Makes the current environment information into a string.
+
+        Returns:
+            environment_str: str
+                Describes heap, current_player, and num_player information
+        """
         return f"Heap {self.heap}, Current Player {self.current_player}, Number of Players {self.num_players}"
 
     def __eq__(self, o: object) -> bool:
@@ -153,10 +163,10 @@ class Environment:
 # Returns an environment from a state
 def from_state(state):
     """
-    Creates a nim environment from the current state
+    Creates a nim environment from the current state.
 
     Args:
-        state (list): (num_players, current_player, heap) 
+        state (list): (heap, current_player, num_players) 
 
     Returns:
         Environment: list
@@ -167,11 +177,15 @@ def from_state(state):
 
 def str_to_action(action_str):
     """
+    Converts a string into an action for Nim.
+
     Args:
-        action_str ([type]): [description]
+        action_str (str):
+            A string of the form "(pile,num_stones)"
 
     Returns:
-        [type]: [description]
+        (int, int):
+            (heap, stones) (actions intended  by  action_str)
     """
     return tuple(map(int, action_str.split(",")))
 
