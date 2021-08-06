@@ -29,7 +29,6 @@ class PerfectPlayer:
         
         return environment.random_action()
                        
-
 class AlmostPerfectPlayer:
     """
     An AlmostPerfectPlayer choses an optimal action for the game nim, except when the current environment is a weakness_position.
