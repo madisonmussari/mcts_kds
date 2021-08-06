@@ -120,7 +120,7 @@ class TreeNode:
 
     def backpropagation(self, value):
         """
-        Propagates the value from a node to all of its ancestors.
+        Propagates the value from a node to all of its ancestors. 
         
         Args:
             value: int
