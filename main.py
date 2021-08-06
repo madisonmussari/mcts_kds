@@ -10,5 +10,3 @@ if __name__ == "__main__":
 
     log = play(start_board, [player1, player2])
     print(log)
-
-# could make into function to test human player

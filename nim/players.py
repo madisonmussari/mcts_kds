@@ -20,7 +20,6 @@ class PerfectPlayer:
             (pile,num_stones): (int,int)
                 the location and number of stones removed from a heap
         """
-        # a perfect player attempts to return a heap with a nim_sum of 0
         current_nim_sum = nim_sum(environment.heap)
         if current_nim_sum != 0:
             for heap_idx, current_stones in enumerate(environment.heap):
@@ -33,7 +32,7 @@ class PerfectPlayer:
 
 class AlmostPerfectPlayer:
     """
-    An AlmostPerfectPlayer choses an optimal action for the game nim, except when in a weakness_position.
+    An AlmostPerfectPlayer choses an optimal action for the game nim, except when the current environment is a weakness_position.
     """
     def __init__(self, weakness_positions) -> None:
         """
@@ -45,8 +44,7 @@ class AlmostPerfectPlayer:
 
     def action(self, environment):
         """
-        Acts as a perfect player unless it sees one of the weakness_positions, in which case, it returns a
-        subobtimal action.
+        Acts as a perfect player unless it is in a weakness_positions, in which case, it returns a subobtimal action.
 
         Args:
             environment: nim.Environment
@@ -61,16 +59,16 @@ class AlmostPerfectPlayer:
         
         return self.perfect.action(environment)
 
-
 class RandomPlayer:
     """
-    A RandomPlayer choses random valid actions for the game nim.
+    A RandomPlayer choses a random valid actions for the game nim.
     """
     def __init__(self) -> None:
         pass
 
     def action(self, environment):
-        """[summary]
+        """
+        Determines a random action for a player to make.
 
         Args:
             environment: nim.Environment
