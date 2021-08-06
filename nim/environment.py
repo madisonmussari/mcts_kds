@@ -20,9 +20,9 @@ class Environment:
         self.num_players = num_players
 
     
-    def turn(self):
+    def turn(self): 
         """
-        Determines which player's turn it is.
+        Determines which player's turn it is. 
 
         Returns:
             current_player: int 
@@ -33,7 +33,7 @@ class Environment:
 
     def valid_actions(self):
         """
-        Finds the possible actions that could be taken by the player in the current environment.
+        Finds the possible actions that could be taken by the player in the current environment. 
 
         Returns:
             valid_action_iterable: [(pile,num_stones)]
@@ -96,7 +96,7 @@ class Environment:
 
     def is_terminal(self):
         """
-        Checks if the current heap represents a terminal position.
+        Checks if the current heap represents a terminal position. 
 
         Returns:
             Boolean: True or False
@@ -161,7 +161,7 @@ class Environment:
     def __hash__(self) -> int:
         return hash(repr(self))
 
-# Returns an environment from a state
+
 def from_state(state):
     """
     Creates a nim environment from the current state.

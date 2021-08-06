@@ -18,8 +18,6 @@ def make_expanded_node(heap=[3, 2, 4], current_player=0, num_players=2):
 
 
 # test the functions in the TreeNode class
-
-
 def test_selection_1():
     parent_node = make_expanded_node()
 
@@ -30,8 +28,7 @@ def test_selection_1():
         parent_node.num_visits += 2 * count
         actions.append(action)
 
-    # Since all children have the same score, and exploreation parameter is different from zero,
-    # we should explore the least visited child.
+    # Since all children have the same score, and exploration parameter is different from zero, we should explore the least visited child.
     expected_selection = {actions[0]}
     selected = set(parent_node.selection())
     assert expected_selection == selected
@@ -47,8 +44,7 @@ def test_selection_2():
         parent_node.num_visits += 2 * count
         actions.append(action)
 
-    # Since all children have the same score, and exploreation parameter is different from zero,
-    # we should explore the least visited child.
+    # Since all children have the same score, and exploreation parameter is different from zero, we should explore the least visited child.
     expected_selection = {actions[0]}
     selected = set(parent_node.selection())
     assert expected_selection == selected
@@ -64,8 +60,7 @@ def test_selection_3():
         parent_node.num_visits += 2 * count
         actions.append(action)
 
-    # Since all children have the same score, and exploreation parameter is zero,
-    # All children are equally good.
+    # Since all children have the same score, and exploration parameter is zero, all children are equally good.
     expected_selection = set(actions)
     selected = set(parent_node.selection(0))
     assert expected_selection == selected
@@ -81,7 +76,7 @@ def test_selection_4():
         parent_node.num_visits += count
         actions.append(action)
 
-    # With explorarion parameter equal to zero, we should select the best score (the first child)
+    # With exploration parameter equal to zero, we should select the best score (the first child).
     expected_selection = {actions[0]}
     selected = set(parent_node.selection(0))
     assert expected_selection == selected
@@ -97,14 +92,13 @@ def test_selection_5():
         parent_node.num_visits += count
         actions.append(action)
 
-    # With explorarion parameter equal to zero, we should select the best score (the last child)
+    # With exploration parameter equal to zero, we should select the best score (the last child).
     expected_selection = {actions[-1]}
     selected = set(parent_node.selection(0))
     assert expected_selection == selected
 
 
 def test_expansion_1():
-    # First example
     environment = nim.Environment([2, 3, 1], 0, 2)
     root_node = mcts.TreeNode(environment)
 
@@ -124,7 +118,6 @@ def test_expansion_1():
     assert root_node.is_expanded == True
 
 def test_expansion_2():
-    # First example
     environment = nim.Environment([2, 2, 2], 2, 3)
     root_node = mcts.TreeNode(environment)
 

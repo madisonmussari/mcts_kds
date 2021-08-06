@@ -1,9 +1,5 @@
 from context import nim
 
-# Write test functions for each of the methods of nim environment
-
-
-# Test state method
 def test_state():
     environment = nim.Environment([3, 2, 0], 1, 3)
     expected_environment = ((2, 3), 1, 3)
@@ -18,7 +14,6 @@ def test_state():
     assert environment.state() == expected_environment
 
 
-# Checks the is terminal method
 def test_is_terminal():
     environment = nim.Environment([3], 1, 3)
     assert environment.is_terminal() == True
@@ -26,8 +21,6 @@ def test_is_terminal():
     environment = nim.Environment([2, 3, 1], 1, 3)
     assert environment.is_terminal() == False
 
-
-# Checks value of terminal environments method
 def test_value():
     environment = nim.Environment([2], 1, 3)
     assert environment.value(0) == -1
@@ -42,7 +35,6 @@ def test_value():
     assert environment.value(3) == None  # FIXME: Throw error
 
 
-# Tests turn method
 def test_turn():
     environment = nim.Environment([2, 3, 1], 0, 3)
     assert environment.turn() == 0
@@ -54,7 +46,6 @@ def test_turn():
     assert environment.turn() == 2
 
 
-# Test what_if method
 def test_what_if():
     environment = nim.Environment([2, 3, 1], 0,
                                   3)  # current state ([1, 2, 3], 0, 3)
@@ -92,8 +83,6 @@ def test_what_if():
     expected_state = ((2,), 1, 3)  # State does not change
     assert expected_state == environment.state()
 
-
-# Tests valid action  method
 def test_valid_actions():
     environment = nim.Environment([2, 2, 3], 0, 3)
     expected_valid_actions = {(0, 1), (0, 2), (1, 1), (1, 2), (2, 1), (2, 2), (2, 3)}
@@ -101,7 +90,6 @@ def test_valid_actions():
     assert expected_valid_actions == returned_valid_actions
 
 
-# Test number of players
 def test_num_agents():
     for num_players in range(1, 10):
         environment = nim.Environment([2, 2, 3], 0, num_players)
@@ -157,7 +145,7 @@ def test_simple_game():
     environment_valid_actions = {x for x in environment.valid_actions()}
     assert valid_actions == environment_valid_actions
 
-# Tests creating of a Nim environment from state
+
 def test_from_state():
     original_state = ((1, 2, 3), 1, 3)
     environment = nim.from_state(original_state)
@@ -165,7 +153,7 @@ def test_from_state():
 
     assert original_state == environment_state
 
-# Test random action
+
 def test_random_action():
     from math import sqrt
     from math import ceil
@@ -186,8 +174,6 @@ def test_random_action():
 
     for repetions in actions_seen.values():
         assert abs(repetions - expected_number_of_actions) <= threshold
-
-
 
 def test_eq():
     heap = [1,2,3]
