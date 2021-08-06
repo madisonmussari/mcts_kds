@@ -14,7 +14,8 @@ class TreeNode:
 
         Args:
             environment: nim.Environment
-            cache (dict): Takes a node and returns its corresponding tree_node.
+            cache: dict
+                takes a node and returns its corresponding tree_node.
         """
         self.environment = environment
         self.num_visits = 0
@@ -41,11 +42,12 @@ class TreeNode:
         This method returns a list of valid actions with higher ucb score (specific formula used to determine).
 
         Args:
-            exploration_parameter (int): Keeps the balance between exploring new parts of the tree or exploiting current parts that have been explored. Defaults to sqrt(2). #CHECK
+            exploration_parameter: int
+                keeps the balance between exploring new parts of the tree or exploiting current parts that have been explored; defaults to sqrt(2)
 
         Returns:
             best_actions: list
-                Contains actions that will lead to a desirable result for the current player.
+                contains actions that will lead to a desirable result for the current player.
         """
         best_actions = []
         best_score = -inf
@@ -74,7 +76,8 @@ class TreeNode:
         The default rollout_strategy will return a random action from all possible actions.
 
         Args:
-            rollout_strategy (environment): Takes an environment and returns an action. Defaults to random_rollout.
+            rollout_strategy: environment
+                takes an environment and returns an action. Defaults to random_rollout.
 
         Returns:
             simulation_value: list #CHECK
@@ -120,7 +123,8 @@ class TreeNode:
         Propagates the value from a node to all of its ancestors.
         
         Args:
-            value (int): the specifc value of the environment (1 for a win and -1 for a loss) 
+            value: int
+                the specifc value of the environment (1 for a win and -1 for a loss) 
         """
         for i in range(len(self.agent_to_value)):
             self.agent_to_value[i] += value[i]

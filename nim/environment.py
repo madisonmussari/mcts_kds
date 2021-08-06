@@ -7,12 +7,12 @@ class Environment:
     def __init__(self, heap=[10, 10, 10], current_player=0, num_players=2):
         """
         Args:
-            heap : [int]
-                Describes the number of heaps and stones in each heap. Defaults to [10, 10, 10].
+            heap: [int]
+                describes the number of heaps and stones in each heap. Defaults to [10, 10, 10].
             current_player: int
-                Keeps track of which player's turn it is. Defaults to 0.
+                keeps track of which player's turn it is. Defaults to 0.
             num_players: int
-                Takes note of the number of players in the game. Defaults to 2.
+                takes note of the number of players in the game. Defaults to 2.
         """
 
         self.heap = [h for h in sorted(heap) if h > 0]
@@ -36,7 +36,7 @@ class Environment:
         Finds the possible actions that could be taken by the player in the current environment.
 
         Returns:
-            valid_action_iterable: [(heap, stones)]
+            valid_action_iterable: [(pile,num_stones)]
                 a valid heap and number of stones that a player could take from that heap. 
         """
         if self.is_terminal():
@@ -114,7 +114,8 @@ class Environment:
 
         Returns:
             score: int
-                the value for this environment (1 for a win and -1 for a loss). When the environment is not terminal, it returns None.
+                the value for this environment (1 for a win and -1 for a loss)
+                when the environment is not terminal, it returns None.
         """
         score = None
         if self.is_terminal() and (current_player < self.num_players):
@@ -148,7 +149,7 @@ class Environment:
 
         Returns:
             environment_str: str
-                Describes heap, current_player, and num_player information
+                describes heap, current_player, and num_player information
         """
         return f"Heap {self.heap}, Current Player {self.current_player}, Number of Players {self.num_players}"
 
@@ -185,7 +186,7 @@ def str_to_action(action_str):
 
     Returns:
         (int, int):
-            (heap, stones) (actions intended  by  action_str)
+            ((pile,num_stones)), actions intended by action_str
     """
     return tuple(map(int, action_str.split(",")))
 
