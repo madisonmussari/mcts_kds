@@ -8,7 +8,7 @@ class MctsPlayer:
 
     def action(self, environment):
         current_node=self.cache.get(environment, mcts.TreeNode(environment, self.cache))
-        if not current_node.is_expanded:
+        if not current_node.is_expanded: # num_rounds vs num_visits
             current_node.expansion()
         
         return choice(current_node.selection(0))
