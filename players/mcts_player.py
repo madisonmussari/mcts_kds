@@ -3,7 +3,7 @@ from math import sqrt
 from context import mcts
 
 class MctsPlayer:
-    def __init__(self, rounds, exploration_param=sqrt(2), oponent=None, cache=dict()):
+    def __init__(self, rounds=1000, exploration_param=sqrt(2), oponent=None, cache=dict()):
         self.cache=cache
 
     def action(self, environment):
