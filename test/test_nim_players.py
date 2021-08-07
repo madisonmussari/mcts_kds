@@ -1,5 +1,6 @@
 from context import nim
 from context import utils
+from context import players
 
 
 def test_perfect_player_vs_random_player():
@@ -67,7 +68,7 @@ def test_almost_perfect_player_vs_perfect_player_2():
 def test_perfect_player_vs_mcts_player():
     environment = nim.Environment([3, 4, 5], 0, 2)
     player_0 = nim.PerfectPlayer()
-    player_1 = nim.MctsPlayer()
+    player_1 = players.MctsPlayer()
 
     log = utils.play(environment, [player_0, player_1])
     (last_environment, _, _) = log[-1]
@@ -80,7 +81,7 @@ def test_perfect_player_vs_mcts_player():
 def test_almost_perfect_player_vs_mcts_player():
     environment = nim.Environment([3, 4, 5], 0, 2)
     player_0 = nim.AlmostPerfectPlayer([3, 4, 5])
-    player_1 = nim.MctsPlayer()
+    player_1 = players.MctsPlayer()
 
     log = utils.play(environment, [player_0, player_1])
     (last_environment, _, _) = log[-1]
@@ -93,7 +94,7 @@ def test_almost_perfect_player_vs_mcts_player():
 def test_random_player_vs_mcts_player():
     environment = nim.Environment([3, 4, 5], 0, 2)
     player_0 = nim.RandomPlayer()
-    player_1 = nim.MctsPlayer()
+    player_1 = players.MctsPlayer()
 
     log = utils.play(environment, [player_0, player_1])
     (last_environment, _, _) = log[-1]
