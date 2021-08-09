@@ -2,7 +2,7 @@ from random import choice
 from context import mcts
 
 class MctsPlayer:
-    def __init__(self, rounds=10, exploration_param=2, opponent=None, cache=dict()):
+    def __init__(self, rounds=100, exploration_param=2, opponent=None, cache=dict()):
         self.rounds=rounds
         self.exploration_param=exploration_param
         self.opponent = opponent
