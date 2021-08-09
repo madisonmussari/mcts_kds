@@ -90,11 +90,14 @@ def test_almost_perfect_player_vs_mcts_player():
     assert last_environment.value(1) == 1
 
 def test_random_player_vs_mcts_player():
-    environment = nim.Environment([3, 4, 5], 0, 2)
+    environment = nim.Environment([2, 3, 4], 0, 2)
     player_0 = nim.RandomPlayer()
-    player_1 = players.MctsPlayer()
+    player_1 = players.MctsPlayer(exploration_param=10)
+
+    for _ in range(1000):
+        utils.play(environment, [player_1, player_1])
     
-    for _ in range(20):
+    for _ in range(5):
         log = utils.play(environment, [player_0, player_1])
         (last_environment, _, _) = log[-1]
 

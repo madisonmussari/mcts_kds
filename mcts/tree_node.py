@@ -37,7 +37,7 @@ class TreeNode:
     def __repr__(self) -> str:
         return f"Environment {self.environment}, Parent {self.parent}, Action {self.action} "
 
-    def selection(self, exploration_parameter=sqrt(2)): # theoretically the exploration parameter is equal to sqrt(2)
+    def selection(self, exploration_parameter=2): # theoretically the exploration parameter is equal to sqrt(2)
         """
         This method returns a list of valid actions with higher ucb score (specific formula used to determine).
 
@@ -55,7 +55,8 @@ class TreeNode:
         for action, child in self.children.items():
             child_value = child.agent_to_value[current_player]
             child_visits = child.num_visits
-            score = child_value / child_visits + exploration_parameter * sqrt(
+            score = child_value / child_visits + sqrt( 
+                exploration_parameter *
                 log(self.num_visits) / child_visits)
             if score == best_score:
                 best_actions.append(action)
@@ -67,7 +68,7 @@ class TreeNode:
 
         return best_actions
 
-    def simulation(self, rollout_strategy=random_rollout):
+    def simulation(self, exploration_param=2, rollout_strategy=random_rollout):
         """
         Runs a current environment until a terminal state and returns its value. 
         For expanded nodes, it chooses the next environment based on the selection function. 
@@ -85,12 +86,12 @@ class TreeNode:
 
         current_node = self
         while current_node.is_expanded and not current_node.environment.is_terminal():
-            best_action = choice(current_node.selection())
+            best_action = choice(current_node.selection(exploration_param))
             current_node = current_node.children[best_action]
 
         current_environment = current_node.environment
         while not (current_environment.is_terminal()):
-            current_environment = rollout_strategy(current_environment)
+            current_environment = current_environment.what_if(rollout_strategy(current_environment))
         
         simulation_value = [
             current_environment.value(k)

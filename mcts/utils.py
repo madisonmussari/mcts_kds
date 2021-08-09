@@ -8,4 +8,4 @@ def random_rollout(environment):
     Returns:
         environment: nim.Environment
     """
-    return environment.what_if(environment.random_action())
+    return environment.random_action()
