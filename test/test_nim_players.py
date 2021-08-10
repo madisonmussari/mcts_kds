@@ -92,12 +92,12 @@ def test_almost_perfect_player_vs_mcts_player():
 def test_random_player_vs_mcts_player():
     environment = nim.Environment([2, 3, 4], 0, 2)
     player_0 = nim.RandomPlayer()
-    player_1 = players.MctsPlayer(exploration_param=2)
+    player_1 = players.MctsPlayer()
 
-    for _ in range(1000):
+    for _ in range(100):
         utils.play(environment, [player_1, player_1])
     
-    for _ in range(10):
+    for _ in range(5):
         log = utils.play(environment, [player_1, player_0])
         (last_environment, _, _) = log[-1]
 
