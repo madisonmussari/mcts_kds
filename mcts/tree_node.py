@@ -50,6 +50,11 @@ class TreeNode:
             best_actions: list
                 contains actions that will lead to a desirable result for the current player.
         """
+        
+        total_visits = 0
+        for child in self.children.values():
+            total_visits += child.num_visits
+
         best_actions = []
         best_score = -inf
         current_player = self.environment.turn()
@@ -58,7 +63,7 @@ class TreeNode:
             child_visits = child.num_visits
             score = child_value / child_visits + sqrt( 
                 exploration_parameter *
-                log(self.num_visits) / child_visits)
+                log(total_visits) / child_visits)
             if score == best_score:
                 best_actions.append(action)
                 best_score = score
@@ -69,7 +74,7 @@ class TreeNode:
 
         return best_actions
 
-    def simulation(self, exploration_param=2, rollout_strategy=random_rollout):
+    def simulation(self, exploration_param=0.5, rollout_strategy=random_rollout):
         """
         Runs a current environment until a terminal state and returns its value. 
         For expanded nodes, it chooses the next environment based on the selection function. 
@@ -112,8 +117,12 @@ class TreeNode:
 
         for action in self.environment.valid_actions():
             child_environment = self.environment.what_if(action)
-            child_node = self.cache.get(
-                child_environment, TreeNode(child_environment, self.cache))
+
+            if child_environment in self.cache:
+                child_node = self.cache.get(child_environment)
+            else:
+                child_node = TreeNode(child_environment, self.cache)
+
             child_node.parents.add(self.environment)
             child_node.simulation()
             self.children[action] = child_node

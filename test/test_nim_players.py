@@ -94,10 +94,10 @@ def test_random_player_vs_mcts_player():
     player_0 = nim.RandomPlayer()
     player_1 = players.MctsPlayer()
 
-    for _ in range(100):
+    for _ in range(1000):
         utils.play(environment, [player_1, player_1])
     
-    for _ in range(5):
+    for _ in range(10):
         log = utils.play(environment, [player_1, player_0])
         (last_environment, _, _) = log[-1]
 
