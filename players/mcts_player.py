@@ -1,27 +1,38 @@
+from mcts.tree_node import TreeNode
 from random import choice
 from context import mcts
 
+
 class MctsPlayer:
-    def __init__(self, rounds=1, exploration_param=0.5, opponent=None, cache=dict()):
-        self.rounds=rounds
-        self.exploration_param=exploration_param
-        self.opponent = opponent
-        self.cache=cache
+    def __init__(self,
+                 cache=dict(),
+                 exploration_param=0.5,):
+        self.exploration_param = exploration_param
+        self.cache = cache
 
     def action(self, environment):
-        if environment in self.cache:
-            current_node = self.cache.get(environment)
-        else:
-            current_node = mcts.TreeNode(environment, self.cache)
-
-        if not current_node.is_expanded: # num_rounds vs num_visits
-            current_node.expansion()
         
-        for i in range(self.rounds):
-            if self.opponent == None:
-                current_node.simulation(self.exploration_param)
-            else:
-                current_node.simulation(self.exploration_param, self.opponent.action)
+        turn=environment.turn()
 
-        return choice(current_node.selection(self.exploration_param))
+        if environment not in self.cache:
+            self.cache[environment]=TreeNode(environment, self.cache)
+        
+        current_node = self.cache.get(environment)
+        
+        if not current_node.is_expanded:
+            current_node.expansion()
+
+        action=choice(current_node.selection(self.exploration_param))
+
+        next_node=current_node.children[action]
+
+        if not next_node.is_expanded:
+            next_node.expansion()
+        
+        return action
+
+
+
+
+
 

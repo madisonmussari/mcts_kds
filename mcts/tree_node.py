@@ -104,7 +104,7 @@ class TreeNode:
             for k in range(current_environment.num_agents())
         ]
 
-        current_node.backpropagation(simulation_value)
+        # current_node.backpropagation(simulation_value)
         return simulation_value
 
    
@@ -124,7 +124,8 @@ class TreeNode:
                 child_node = TreeNode(child_environment, self.cache)
 
             child_node.parents.add(self.environment)
-            child_node.simulation()
+            child_node_value = child_node.simulation()
+            child_node.backpropagation(child_node_value)
             self.children[action] = child_node
 
         self.is_expanded = True
