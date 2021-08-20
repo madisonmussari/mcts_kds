@@ -1,6 +1,5 @@
 from mcts.tree_node import TreeNode
 from random import choice
-from context import mcts
 
 
 class MctsPlayer:
