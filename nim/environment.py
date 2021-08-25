@@ -38,6 +38,9 @@ class Environment:
         Returns:
             valid_action_iterable: [(pile,num_stones)]
                 a valid heap and number of stones that a player could take from that heap. 
+            Note: does not return a tuple but an iterator to tuples; creates a generator to 
+            generator so you don't have to store all the possible moves all the time,it just stores 
+            them as they get calculated.
         """
         if self.is_terminal():
             return iter([])
