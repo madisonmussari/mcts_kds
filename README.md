@@ -23,10 +23,58 @@ mcts_kds.turn()
 # this function produces the game state/environment assuming that player moves "action"
 mcts_kds.what_if(action)
 
-# excecutes the simulation step in the mcts algorithm; runs a current environment until a terminal state is reached and returns its value
-mcts_kds.simulation(exploration_param=0.5, rollout_strategy=random_rollout)
+# excecutes the simulation step in the mcts algorithm; 
+# runs a current environment until a terminal state is reached and returns its value
+mcts_kds.simulation(exploration_param = 0.5, rollout_strategy=random_rollout)
 
 ```
+
+## Format for Game
+
+When using mcts_kds you should format your two-player game as follows (see nim --> environment.py for more details):
+
+```python
+class Environment:
+"""
+Creates a new game environment.
+"""
+    def __init__(self):
+
+    def turn(self):
+        return
+
+    def valid_actions(self):
+        return
+
+    def random_action(self):
+        return
+    
+    def what_if(self):
+        return
+
+    def is_terminal(self):
+        return
+
+    def value(self):
+        return
+
+    def num_agents(self):
+        return
+
+    def state(self):
+        return
+
+    def __repr__(self):
+        return
+
+    def __eq__(self):
+        return
+    
+    def __hash__(self):
+        return
+ 
+```
+
 
 ## Contributing
 
