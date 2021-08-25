@@ -2,4 +2,5 @@
 .venv
 .pytest_cache
 dist
+mcts_kds.egg-info
 */__pycache__
