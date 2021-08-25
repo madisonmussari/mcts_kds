@@ -12,11 +12,19 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install mcts_kd
 pip install mcts_kds
 ```
 
-## Usage
+## Usage Examples
 
 ```python
 import mcts_kds
 
+# this function determines which player's turn it is
+mcts_kds.turn()
+
+# this function produces the game state/environment assuming that player moves "action"
+mcts_kds.what_if(action)
+
+# excecutes the simulation step in the mcts algorithm; runs a current environment until a terminal state is reached and returns its value
+mcts_kds.simulation(exploration_param=0.5, rollout_strategy=random_rollout)
 
 ```
 
