@@ -29,9 +29,11 @@ mcts_kds.simulation(exploration_param=0.5, rollout_strategy=random_rollout)
 ```
 
 ## Contributing
+
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
 ## Author
+
 Written by Madison Mussari during the Summer of 2021, supervised by Pedro Rangel.
