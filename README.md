@@ -12,36 +12,63 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install mcts_kd
 pip install mcts_kds
 ```
 
+## Implementing Players
+
+You can create and import different types of players by implementing action,a function that determines how the player will chose moves in certain environments.For nim I created a perfect player, almost perfect player, and random player.
+The library gives by default a HumanPlayer and MctsPlayer, however, you could add more by implementing action.
+
+This is an example of how you could code a new player:
+
+```python
+
+class Player:
+    def __init__(self) -> None:
+        pass
+
+    def action(self, environment):
+        """
+        Determines a certain action for a player to make.
+
+        Args:
+            environment: nim.Environment
+
+        Returns:
+            int
+                the action chosen
+        """
+        return action
+
+```
+
+## Importing
+
+When you install mcts-kds, the you will gets access to the following libraries:
+mcts, nim, players, test, and utils
+
 ## Usage Examples
 
 ```python
-import mcts_kds
 
-# you can create and import different types of players by implementing action, 
-# a function that determines how the player will chose moves in certain environments; 
-# for nim I created a perfect player, almost perfect player, and random player
-from players import HumanPlayer
-from players import MctsPlayer
-
+import players
+from nim import str_to_action
 from nim import Environment
-from utils import play
+import utils
 
 if __name__ == "__main__":
     start_board = Environment([2, 3, 1], 0, 2)
 
-    # the library gives by default a HumanPlayer and MctsPlayer, however, you could add more by implementing action
-    player1 = MctsPlayer(exploration_param = 0.5)
-    player2 = HumanPlayer(str_to_action)
+    player1 = players.MctsPlayer(exploration_param = 0.5)
+    player2 = players.HumanPlayer(str_to_action)
 
     # here we are training the MctsPlayer by playing it against itself for multiple rounds 
     # and determining the results of these games; here the MctsPlayer is self-playing for 10000 rounds
     for _ in range(10000):
-        log = utils.play(Environment, [player1, player1])
+        log = utils.play(start_board, [player1, player1])
         (last_environment, _, _) = log[-1]
         game_value = [last_environment.value(k) for k in range(last_environment.num_agents())]
         player1.cache[last_environment].backpropagation(game_value)
 
-    log = play(start_board, [player1, player2])
+    log = utils.play(start_board, [player1, player2])
     print(log)
 
 ```
