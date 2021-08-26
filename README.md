@@ -49,7 +49,7 @@ Creates a new game environment.
     def random_action(self):
         return
     
-    def what_if(self):
+    def what_if(self, action):
         return
 
     def is_terminal(self):
@@ -75,6 +75,13 @@ Creates a new game environment.
  
 ```
 
+## Documentation
+
+Docstrings have been written for individual, methods within the code, stating the general goal for the method and what is being sent and returned from it.
+
+## Tests
+
+Tests have been coded for all major method and can be used as a tool to understand the true functionality of the code.
 
 ## Contributing
 
