@@ -174,7 +174,7 @@ def from_state(state):
 
     Returns:
         Environment: list
-            returns a list of states
+           a list of states
     """
     return Environment(list(state[0]), state[1], state[2])
 

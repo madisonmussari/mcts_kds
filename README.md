@@ -1,6 +1,6 @@
 # mcts_kds
 
-mcts_kds is a Python library used to apply Monte Carlo Tree Search algorithm to two player games that allows the current player to have complete information (eg. tictactoe, chess, othello)
+mcts_kds is a Python library used to apply Monte Carlo Tree Search algorithm to complete information two player games (eg. tictactoe, chess, othello).
 
 To show how mcts works, I coded the game nim and created a mcts player to chose moves that would lead to a win. However, the purpose of creating this library was to allow others to apply the algorithm to games they program.
 
@@ -17,19 +17,33 @@ pip install mcts_kds
 ```python
 import mcts_kds
 
-# this function determines which player's turn it is
-mcts_kds.turn()
+# you can create and import different types of players by implementing action, a function that determines how the player will chose moves in certain environments; 
+# for nim I created a perfect player, almost perfect player, and random player
+from players import HumanPlayer
+from players import MctsPlayer
 
-# this function produces the game state/environment assuming that player moves "action"
-mcts_kds.what_if(action)
+from nim import str_to_action
+from nim import Environment
+from utils import play
 
-# excecutes the simulation step in the mcts algorithm; 
-# runs a current environment until a terminal state is reached and returns its value
-mcts_kds.simulation(exploration_param = 0.5, rollout_strategy=random_rollout)
+if __name__ == "__main__":
+    start_board = Environment([2, 3, 1], 0, 2)
+    player1 = MctsPlayer(exploration_param = 0.5)
+    player2 = HumanPlayer(str_to_action)
+
+    # here we are training the MctsPlayer by playing it against itself for multiple rounds and determining the results of these games; here the MctsPlayer is self-playing for 10000 rounds
+    for _ in range(10000):
+        log = utils.play(Environment, [player1, player1])
+        (last_environment, _, _) = log[-1]
+        game_value = [last_environment.value(k) for k in range(last_environment.num_agents())]
+        player1.cache[last_environment].backpropagation(game_value)
+
+    log = play(start_board, [player1, player2])
+    print(log)
 
 ```
 
-## Format for Game
+## Format for Your Own Game
 
 When using mcts_kds you should format your two-player game as follows (see nim --> environment.py for more details):
 
@@ -41,30 +55,85 @@ Creates a new game environment.
     def __init__(self):
 
     def turn(self):
+        """
+        Determines which player's turn it is. 
+
+        Returns:
+            the identifier for the current player
+        """
         return
 
     def valid_actions(self):
+        """
+        Finds the possible actions that could be taken by the player in the current environment. 
+
+        Returns:
+            an iterable of valid actions
+        """
         return
 
     def random_action(self):
+        """
+        Produces a valid random action.
+
+        Returns:
+           a random action
+        """
         return
     
     def what_if(self, action):
+        """
+        Produces game state/environment assuming that player moves "action". 
+
+        Returns:
+            environment: nim.Environment
+                the state which results from taking action
+        """
         return
 
     def is_terminal(self):
+        """
+        Checks if the current environment represents a terminal position. 
+
+        Returns:
+            Boolean: True or False
+                True if the state is terminal, False if it is not
+        """
         return
 
     def value(self):
+        """
+        Determines the value of a terminal environment (last node in a branch). If the environment is not terminal, it returns None.
+
+        Returns:
+            score: int
+                the value for this environment (1 for a win and -1 for a loss)
+                when the environment is not terminal, it returns None.
+        """
         return
 
     def num_agents(self):
+        """
+        Determines how many agents are playing in the game.
+        
+        Returns:
+            number of agents in the game
+        """
         return
 
     def state(self):
+        """
+        Describes the current environment of the game.
+
+        Returns:
+            the state 
+        """
         return
 
     def __repr__(self):
+    """
+    Makes the current environment information into a string.
+    """
         return
 
     def __eq__(self):
@@ -72,6 +141,24 @@ Creates a new game environment.
     
     def __hash__(self):
         return
+
+def from_state(state):
+"""
+Creates a nim environment from the current state.
+
+Returns:
+    a list of states
+"""
+    return
+
+def str_to_action(action_str):
+"""
+Converts a string into an action for Nim.
+
+Returns:
+    actions intended by action_str
+ """
+    return
  
 ```
 
@@ -81,7 +168,7 @@ Docstrings have been written for individual, methods within the code, stating th
 
 ## Tests
 
-Tests have been coded for all major method and can be used as a tool to understand the true functionality of the code.
+Tests have been coded for all major methods and can be used as a tool to understand the true functionality of the code.
 
 ## Contributing
 
@@ -91,4 +178,4 @@ Please make sure to update tests as appropriate.
 
 ## Author
 
-Written by Madison Mussari during the Summer of 2021, supervised by Pedro Rangel.
+Written by Madison Mussari during the Summer of 2021.
