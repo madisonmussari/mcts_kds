@@ -1,6 +1,6 @@
 # mcts_kds
 
-mcts_kds is a Python library used to apply Monte Carlo Tree Search algorithm to complete information two player games (eg. tictactoe, chess, othello).
+mcts_kds is a Python library used to apply Monte Carlo Tree Search algorithm to solve complete information two player games (eg. tictactoe, chess, othello).
 
 To show how mcts works, I coded the game nim and created a mcts player to chose moves that would lead to a win. However, the purpose of creating this library was to allow others to apply the algorithm to games they program.
 
@@ -23,12 +23,13 @@ import mcts_kds
 from players import HumanPlayer
 from players import MctsPlayer
 
-from nim import str_to_action
 from nim import Environment
 from utils import play
 
 if __name__ == "__main__":
     start_board = Environment([2, 3, 1], 0, 2)
+
+    # the library gives by default a HumanPlayer and MctsPlayer, however, you could add more by implementing action
     player1 = MctsPlayer(exploration_param = 0.5)
     player2 = HumanPlayer(str_to_action)
 
@@ -61,7 +62,8 @@ Creates a new game environment.
         Determines which player's turn it is. 
 
         Returns:
-            the identifier for the current player
+            int
+                the identifier for the current player
         """
         return
 
@@ -70,7 +72,8 @@ Creates a new game environment.
         Finds the possible actions that could be taken by the player in the current environment. 
 
         Returns:
-            an iterable of valid actions
+            iterator
+                an iterable of valid actions
         """
         return
 
@@ -79,7 +82,8 @@ Creates a new game environment.
         Produces a valid random action.
 
         Returns:
-           a random action
+            int
+                a random action
         """
         return
     
@@ -88,7 +92,8 @@ Creates a new game environment.
         Produces game state/environment assuming that player moves "action". 
 
         Returns:
-            the state which results from taking action
+            environment
+                the state which results from taking action
         """
         return
 
@@ -97,17 +102,18 @@ Creates a new game environment.
         Checks if the current environment represents a terminal position. 
 
         Returns:
-            True if the state is terminal, False if it is not
+            Boolean
+                True if the state is terminal, False if it is not
         """
         return
 
-    def value(self):
+    def value(self, current_player):
         """
         Determines the value of a terminal environment (last node in a branch). If the environment is not terminal, it returns None.
 
         Returns:
-            the value for this environment (1 for a win and -1 for a loss)
-            when the environment is not terminal, it returns None.
+            int
+                the value for this environment (1 for a win and -1 for a loss) when the environment is not terminal, it returns None.
         """
         return
 
@@ -116,7 +122,8 @@ Creates a new game environment.
         Determines how many agents are playing in the game.
         
         Returns:
-            number of agents in the game
+            int
+                number of agents in the game
         """
         return
 
@@ -125,13 +132,17 @@ Creates a new game environment.
         Describes the current environment of the game.
 
         Returns:
-            the state 
+            list
+                the state 
         """
         return
 
     def __repr__(self):
     """
     Makes the current environment information into a string.
+
+    Returns:
+        str
     """
         return
 
@@ -146,7 +157,8 @@ def from_state(state):
 Creates a nim environment from the current state.
 
 Returns:
-    a list of states
+    list
+        a list of states
 """
     return
 
@@ -155,7 +167,8 @@ def str_to_action(action_str):
 Converts a string into an action for Nim.
 
 Returns:
-    actions intended by action_str
+    str
+        actions intended by action_str
  """
     return
  
