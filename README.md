@@ -17,7 +17,8 @@ pip install mcts_kds
 ```python
 import mcts_kds
 
-# you can create and import different types of players by implementing action, a function that determines how the player will chose moves in certain environments; 
+# you can create and import different types of players by implementing action, 
+# a function that determines how the player will chose moves in certain environments; 
 # for nim I created a perfect player, almost perfect player, and random player
 from players import HumanPlayer
 from players import MctsPlayer
@@ -31,7 +32,8 @@ if __name__ == "__main__":
     player1 = MctsPlayer(exploration_param = 0.5)
     player2 = HumanPlayer(str_to_action)
 
-    # here we are training the MctsPlayer by playing it against itself for multiple rounds and determining the results of these games; here the MctsPlayer is self-playing for 10000 rounds
+    # here we are training the MctsPlayer by playing it against itself for multiple rounds 
+    # and determining the results of these games; here the MctsPlayer is self-playing for 10000 rounds
     for _ in range(10000):
         log = utils.play(Environment, [player1, player1])
         (last_environment, _, _) = log[-1]
@@ -86,8 +88,7 @@ Creates a new game environment.
         Produces game state/environment assuming that player moves "action". 
 
         Returns:
-            environment: nim.Environment
-                the state which results from taking action
+            the state which results from taking action
         """
         return
 
@@ -96,8 +97,7 @@ Creates a new game environment.
         Checks if the current environment represents a terminal position. 
 
         Returns:
-            Boolean: True or False
-                True if the state is terminal, False if it is not
+            True if the state is terminal, False if it is not
         """
         return
 
@@ -106,9 +106,8 @@ Creates a new game environment.
         Determines the value of a terminal environment (last node in a branch). If the environment is not terminal, it returns None.
 
         Returns:
-            score: int
-                the value for this environment (1 for a win and -1 for a loss)
-                when the environment is not terminal, it returns None.
+            the value for this environment (1 for a win and -1 for a loss)
+            when the environment is not terminal, it returns None.
         """
         return
 
