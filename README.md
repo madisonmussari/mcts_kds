@@ -14,15 +14,14 @@ pip install mcts_kds
 
 ## Implementing Players
 
-You can create and import different types of players by implementing action, a function that determines how the player will chose moves in certain environments. For Nim I created a perfect player, almost perfect player, and random player.
-The library gives by default a HumanPlayer and MctsPlayer, however, you could add more by implementing action.
+You can create and import different types of players by implementing action, a function that determines how the player will chose moves in certain environments. For Nim I created a perfect player, almost perfect player, and random player. The library gives by default a HumanPlayer and MctsPlayer, however, you could add more by implementing action.
 
 This is an example of how you could code a new player:
 
 ```python
 
 class Player:
-    def __init__(self) -> None:
+    def __init__(self):
         pass
 
     def action(self, environment):
@@ -43,7 +42,7 @@ class Player:
 ## Importing
 
 When you install mcts-kds, the you will gets access to the following libraries:
-mcts, nim, players, test, and utils
+mcts, nim, players, test, and utils,
 
 ## Usage Examples
 
@@ -203,7 +202,7 @@ Returns:
 
 ## Documentation
 
-Docstrings have been written for individual, methods within the code, stating the general goal for the method and what is being sent and returned from it.
+Docstrings have been written for individual methods within the code, stating the general goal for the method and what is being sent and returned from each.
 
 ## Tests
 
@@ -217,4 +216,4 @@ Please make sure to update tests as appropriate.
 
 ## Author
 
-Written by Madison Mussari during the Summer of 2021.
+Written by Madison Mussari during the Summer of 2021
