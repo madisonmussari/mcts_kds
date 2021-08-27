@@ -75,7 +75,7 @@ if __name__ == "__main__":
 
 ## Format for Your Own Game
 
-When using mcts_kds you should format your two-player game as follows (see nim --> environment.py for more details):
+When using mcts_kds you should format your two-player game as follows (see environment.py in the nim folder for more details):
 
 ```python
 class Environment:
