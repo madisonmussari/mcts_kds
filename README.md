@@ -42,7 +42,7 @@ class Player:
 ## Importing
 
 When you install mcts-kds, the you will gets access to the following libraries:
-mcts, nim, players, test, and utils,
+mcts, nim, players, test, and utils.
 
 ## Usage Examples
 
