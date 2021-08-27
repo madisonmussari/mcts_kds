@@ -2,7 +2,7 @@
 
 mcts_kds is a Python library used to apply Monte Carlo Tree Search algorithm to solve complete information two player games (eg. tictactoe, chess, othello).
 
-To show how mcts works, I coded the game nim and created a mcts player to chose moves that would lead to a win. However, the purpose of creating this library was to allow others to apply the algorithm to games they program.
+To show how mcts works, I coded the game Nim and created a mcts player to chose moves that would lead to a win. However, the purpose of creating this library was to allow others to apply the algorithm to games they program.
 
 ## Installation
 
@@ -14,7 +14,7 @@ pip install mcts_kds
 
 ## Implementing Players
 
-You can create and import different types of players by implementing action,a function that determines how the player will chose moves in certain environments.For nim I created a perfect player, almost perfect player, and random player.
+You can create and import different types of players by implementing action, a function that determines how the player will chose moves in certain environments. For Nim I created a perfect player, almost perfect player, and random player.
 The library gives by default a HumanPlayer and MctsPlayer, however, you could add more by implementing action.
 
 This is an example of how you could code a new player:
