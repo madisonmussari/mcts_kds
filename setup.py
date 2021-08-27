@@ -9,4 +9,5 @@ setup(
     author='Madison Mussari, supervised by Pedro Rangel',
     tests_require=['pytest==4.4.1'],
     test_suite='test',
+    license = 'MIT',
 )
